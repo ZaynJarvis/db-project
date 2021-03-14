@@ -72,12 +72,13 @@ CREATE TABLE IF NOT EXISTS OFFER (
 );
 
 INSERT INTO OFFER(quantity, buy, sell, offer_status, offer_time, price, stock_id, trader_id) VALUES
-(40, false, true, "TRADING", TIMESTAMP("1980-12-12 10:40:00"), 100.9, "AAPL", NULL),
-(10, true, false, "DONE", TIMESTAMP("1980-12-12 12:40:00"), 100.9, "AAPL", 1),
-(30, false, true, "CREATED", TIMESTAMP("1980-12-13 11:50:00"), 100.3, "AAPL", 2),
-(10, true, false, "CREATED", TIMESTAMP("1980-12-14 12:30:00"), 140.3, "AAPL", 2),
-(20, false, true, "CREATED", TIMESTAMP("1997-05-15 14:30:00"), 180.1, "AMZN", 2),
-(10, true, false, "CREATED", TIMESTAMP("2010-06-29 12:30:00"), 190.3, "TSLA", 3)
+(40, 0, 1, 'TRADING', '1980-12-12 02:40:00', '100.90', 'AAPL', NULL),
+(10, 1, 0, 'DONE', '1980-12-12 04:40:00', '100.90', 'AAPL', 1),
+(30, 0, 1, 'CREATED', '1980-12-13 03:50:00', '100.30', 'AAPL', 2),
+(10, 1, 0, 'CREATED', '1980-12-14 04:30:00', '95.00', 'AAPL', 2),
+(20, 0, 1, 'CREATED', '1997-05-15 06:30:00', '180.10', 'AMZN', 2),
+(10, 1, 0, 'TRADING', '2010-06-29 04:30:00', '190.30', 'TSLA', 3),
+(5, 0, 1, 'DONE', '2010-06-29 04:32:00', '189.00', 'TSLA', 4)
 ;
 
 CREATE TABLE IF NOT EXISTS TXN (
@@ -93,7 +94,8 @@ CREATE TABLE IF NOT EXISTS TXN (
 );
 
 INSERT INTO TXN(buy_offer_id, sell_offer_id, price, quantity, txn_time) VALUES
-(1, 2, 10.3, 10, TIMESTAMP("1980-12-12 12:40:00"))
+(1, 2, 10.3, 10, "1980-12-12 12:40:00"),
+(6, 7, 189, 5, '2010-06-29 04:32:00')
 ;
 
 CREATE TABLE IF NOT EXISTS COMMENT (
@@ -106,11 +108,11 @@ CREATE TABLE IF NOT EXISTS COMMENT (
 );
 
 INSERT INTO COMMENT(content, comment_time, trader_id) VALUES
-("$AAPL I love the stock", TIMESTAMP("2010-07-29 12:30:00"), 1),
-("$AAPL buy the dip!!!", TIMESTAMP("2010-08-29 12:30:00"), 1),
-("$AAPL diamond hands!", TIMESTAMP("2011-06-29 12:30:00"), 2),
-("$TSLA no news currently", TIMESTAMP("2020-06-29 12:30:00"), 3),
-("$TSLA $AMZN up up up", TIMESTAMP("2021-06-29 12:30:00"), 5)
+("$AAPL I love the stock", "2010-07-29 12:30:00", 1),
+("$AAPL buy the dip!!!", "2010-08-29 12:30:00", 1),
+("$AAPL diamond hands!", "2011-06-29 12:30:00", 2),
+("$TSLA no news currently", "2020-06-29 12:30:00", 3),
+("$TSLA $AMZN up up up", "2021-06-29 12:30:00", 5)
 ;
 
 CREATE TABLE IF NOT EXISTS COMMENT_MENTION_STOCK (
