@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS TXN (
     sell_offer_id INTEGER NOT NULL,
     price DOUBLE NOT NULL,
     quantity INTEGER NOT NULL,
-    txn_time TIME NOT NULL,
+    txn_time TIMESTAMP NOT NULL,
     CONSTRAINT pk PRIMARY KEY (txn_id),
     CONSTRAINT txn_fk1 FOREIGN KEY (buy_offer_id) REFERENCES OFFER(offer_id),
     CONSTRAINT txn_fk2 FOREIGN KEY (sell_offer_id) REFERENCES OFFER(offer_id)
