@@ -81,6 +81,8 @@ INSERT INTO OFFER(quantity, buy, sell, offer_status, offer_time, price, stock_id
 (5, 0, 1, 'DONE', '2010-06-29 04:32:00', '189.00', 'TSLA', 4)
 ;
 
+CREATE INDEX OFFER_ON_STOCK_IDX ON TXN(txn_time);
+
 CREATE TABLE IF NOT EXISTS TXN (
     txn_id INTEGER NOT NULL AUTO_INCREMENT,
     buy_offer_id INTEGER NOT NULL,
@@ -92,6 +94,8 @@ CREATE TABLE IF NOT EXISTS TXN (
     CONSTRAINT txn_fk1 FOREIGN KEY (buy_offer_id) REFERENCES OFFER(offer_id),
     CONSTRAINT txn_fk2 FOREIGN KEY (sell_offer_id) REFERENCES OFFER(offer_id)
 );
+
+CREATE INDEX TXN_TIME_IDX ON TXN(txn_time);
 
 INSERT INTO TXN(buy_offer_id, sell_offer_id, price, quantity, txn_time) VALUES
 (1, 2, 10.3, 10, "1980-12-12 12:40:00"),
@@ -132,3 +136,6 @@ INSERT INTO COMMENT_MENTION_STOCK(comment_id, stock_id) VALUES
 (5, "TSLA"),
 (5, "AMZN")
 ;
+
+CREATE INDEX TXN_TIME_IDX ON TXN(txn_time);
+CREATE INDEX STOCK_IPO_IDX ON STOCK(IPO_date);
