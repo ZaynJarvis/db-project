@@ -49,7 +49,10 @@ CREATE TABLE IF NOT EXISTS USERS (
 
 CREATE TABLE IF NOT EXISTS TRADER (
     trader_id INTEGER NOT NULL,
-    money DECIMAL(15,2) NOT NULL,
+    deposit DECIMAL(15,2) NOT NULL,
+    unreal_profit DECIMAL(15,2) NOT NULL, /* unrealized_profit */
+    real_profit DECIMAL(15,2) NOT NULL,
+    credit_limit DECIMAL(15,2) NOT NULL,
     CONSTRAINT trader_pk PRIMARY KEY (trader_id),
     CONSTRAINT trader_fk FOREIGN KEY (trader_id) REFERENCES USERS(user_id)
 );
@@ -63,12 +66,12 @@ INSERT INTO USERS(name, phone, email, password, user_type) VALUES
 ("Flice", "6002-9003", "flice@x.com", "xxx", "viewer") 
 ;
 
-INSERT INTO TRADER(trader_id, money) VALUES
-(1, 3000.00), 
-(2, 4000.00), 
-(3, 5000.00),
-(4, 3400.00), 
-(5, 3200.00)
+INSERT INTO TRADER(trader_id, deposit, unreal_profit, real_profit, credit_limit) VALUES
+(1, 3000.00, 100, 100, 0), 
+(2, 4000.00, 0, -100, 1000), 
+(3, 5000.00, -200, 100, 200),
+(4, 3400.00, 100, 200, 3000),
+(5, 3200.00, 1000, 200, 2000)
 ;
 
 CREATE TABLE IF NOT EXISTS OFFER (
