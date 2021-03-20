@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS TXN, OFFER, COMMENT_MENTION_STOCK, COMMENT, STOCK_PRICE, STOCK, TRADER, USERS;
+DROP TABLE IF EXISTS TXN, OFFER, COMMENT_MENTION_STOCK, COMMENT, STOCK_PRICE, STOCK, TRADER, USER;
 
 CREATE TABLE IF NOT EXISTS STOCK (
     stock_id VARCHAR(10) NOT NULL,
@@ -37,7 +37,7 @@ INSERT INTO STOCK_PRICE VALUES
 ("SE", "2017-10-03", 100)
 ;
 
-CREATE TABLE IF NOT EXISTS USERS (
+CREATE TABLE IF NOT EXISTS USER (
     user_id INTEGER NOT NULL AUTO_INCREMENT,
     name VARCHAR(40) NOT NULL,
     phone VARCHAR(20) NOT NULL,
@@ -54,10 +54,10 @@ CREATE TABLE IF NOT EXISTS TRADER (
     real_profit DECIMAL(15,2) NOT NULL,
     credit_limit DECIMAL(15,2) NOT NULL,
     CONSTRAINT trader_pk PRIMARY KEY (trader_id),
-    CONSTRAINT trader_fk FOREIGN KEY (trader_id) REFERENCES USERS(user_id)
+    CONSTRAINT trader_fk FOREIGN KEY (trader_id) REFERENCES USER(user_id)
 );
 
-INSERT INTO USERS(name, phone, email, password, user_type) VALUES
+INSERT INTO USER(name, phone, email, password, user_type) VALUES
 ("Alice", "1002-9003", "alice@x.com", "xxx", "trader"), 
 ("Blice", "2002-9003", "blice@x.com", "xxx", "trader"), 
 ("Clice", "3002-9003", "clice@x.com", "xxx", "trader"),
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS COMMENT (
     comment_time TIMESTAMP NOT NULL,
     user_id INTEGER NOT NULL,
     CONSTRAINT pk PRIMARY KEY (comment_id),
-    CONSTRAINT comment_fk FOREIGN KEY (user_id) REFERENCES USERS(user_id)
+    CONSTRAINT comment_fk FOREIGN KEY (user_id) REFERENCES USER(user_id)
 );
 
 INSERT INTO COMMENT(content, comment_time, user_id) VALUES
@@ -158,4 +158,4 @@ INSERT INTO COMMENT_MENTION_STOCK(comment_id, stock_id) VALUES
 
 
 CREATE INDEX STOCK_IPO_IDX ON STOCK(IPO_date);
-CREATE INDEX USER_NAME_IDX ON USERS(name);
+CREATE INDEX USER_NAME_IDX ON USER(name);
